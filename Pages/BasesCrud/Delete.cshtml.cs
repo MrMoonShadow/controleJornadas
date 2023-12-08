@@ -20,7 +20,7 @@ namespace controleJornadas.Pages.BasesCrud
         }
 
         [BindProperty]
-        public Bases Bases { get; set; } = default!;
+        public Base Bases { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

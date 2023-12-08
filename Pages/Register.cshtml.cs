@@ -5,15 +5,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace controleJornadas.Pages
 {
-    public class IndexModel(SignInManager<Usuario> signInManager) : PageModel
+    public class RegisterModel(UserManager<Usuario> userManager) : PageModel
     {
-        private readonly SignInManager<Usuario> signInManager = signInManager;
+        private readonly UserManager<Usuario> userManager = userManager;
 
         [BindProperty]
-        public string Usuario { get; set; }
+        public string? Usuario { get; set; }
 
         [BindProperty]
-        public string Senha { get; set; }
+        public string? Senha { get; set; }
+
+        [BindProperty]
+        public string? ConfirmarSenha { get; set; }
 
         [BindProperty]
         public bool Erro { get; set; } = false;
@@ -30,15 +33,19 @@ namespace controleJornadas.Pages
         {
             try
             {
-                var result = await this.signInManager.PasswordSignInAsync(this.Usuario, this.Senha, false, false);
+                var result = await this.userManager.CreateAsync(new()
+                {
+                    Email = this.Usuario,
+                    UserName = this.Usuario,
+                }, this.Senha);
+
                 if (result.Succeeded)
                 {
-                    return base.RedirectToPage("./Home");
+                    return base.RedirectToPage("./Index");
                 }
-
-                if (result.IsNotAllowed)
+                else 
                 {
-                    throw new Exception("Usuário inativado ou bloqueado");
+                    throw new Exception(string.Join(';',result.Errors));
                 }
 
                 throw new Exception("Usuario ou senha incorretos.");

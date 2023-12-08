@@ -3,41 +3,42 @@
 
 @{
     ViewData["Title"] = "Excluir funcionário";
+    Layout = "_Layout";
 }
 
 
-<h3>Tem certeza que deseja excluir o funcionário @Model.funcionarios.id ?</h3>
+<h3>Tem certeza que deseja excluir o funcionário @Model.funcionarios.Id ?</h3>
 <div>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.nome)
+            @Html.DisplayNameFor(model => model.funcionarios.Nome)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.nome)
+            @Html.DisplayFor(model => model.funcionarios.Nome)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.cargo)
+            @Html.DisplayNameFor(model => model.funcionarios.Cargo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.cargo)
+            @Html.DisplayFor(model => model.funcionarios.Cargo)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.dataAdmissao)
+            @Html.DisplayNameFor(model => model.funcionarios.DataAdmissao)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.dataAdmissao)
+            @Html.DisplayFor(model => model.funcionarios.DataAdmissao)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.codPix)
+            @Html.DisplayNameFor(model => model.funcionarios.CodPix)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.codPix)
+            @Html.DisplayFor(model => model.funcionarios.CodPix)
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="funcionarios.id" />
+        <input type="hidden" asp-for="funcionarios.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="./Index">Voltar</a>
     </form>

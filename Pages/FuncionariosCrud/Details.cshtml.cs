@@ -19,7 +19,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
             _context = context;
         }
 
-        public Funcionarios funcionarios { get; set; } = default!;
+        public Funcionario funcionarios { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,7 +28,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
                 return NotFound();
             }
 
-            var funcionarios = await _context.funcionarios.FirstOrDefaultAsync(m => m.id == id);
+            var funcionarios = await _context.Funcionarios.FirstOrDefaultAsync(m => m.Id == id);
             if (funcionarios == null)
             {
                 return NotFound();

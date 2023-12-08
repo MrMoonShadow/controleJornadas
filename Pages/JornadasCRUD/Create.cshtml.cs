@@ -1,44 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using controleJornadas.Data;
+using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.JornadasCRUD
 {
-    public class CreateModel : PageModel
+    public class CreateModel(ApplicationDbContext context) : PageModel
     {
-        private readonly controleJornadas.Data.ApplicationDbContext _context;
-
-        public CreateModel(controleJornadas.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext context = context;
 
         public IActionResult OnGet()
         {
+            this.Erro = false;
+            this.Message = null;
+            ViewData["Funcionarios"] = new SelectList(this.context.Funcionarios, "Id", "Nome");
             return Page();
         }
 
         [BindProperty]
-        public Jornadas Jornadas { get; set; } = default!;
+        public Jornada Jornada { get; set; } = default!;
+
+        [BindProperty]
+        public bool Erro { get; set; } = false;
+
+        [BindProperty]
+        public string? Message { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                ModelState.ClearValidationState(nameof(Jornada));
+                if (!base.TryValidateModel(Jornada, nameof(Jornada)))
+                {
+                    throw new Exception("Jornada inválida");
+                }
+                else
+                {
+                    this.context.Jornadas.Add(Jornada);
+                    await this.context.SaveChangesAsync();
+
+                    return base.RedirectToPage("./Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Erro = true;
+                this.Message = ex.Message;
                 return Page();
             }
-
-            _context.Jornadas.Add(Jornadas);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
         }
     }
 }

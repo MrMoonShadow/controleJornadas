@@ -1,78 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using controleJornadas.Data;
+using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.FuncionariosCrud
 {
-    public class EditModel : PageModel
+    public class EditModel(ApplicationDbContext context) : PageModel
     {
-        private readonly controleJornadas.Data.ApplicationDbContext _context;
-
-        public EditModel(controleJornadas.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext context = context;
 
         [BindProperty]
-        public Funcionarios funcionarios { get; set; } = default!;
+        public Funcionario Funcionario { get; set; } = default!;
+
+        [BindProperty]
+        public bool Erro { get; set; } = false;
+
+        [BindProperty]
+        public string? Message { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            this.Erro = false;
+            this.Message = null;
+            if (id is null)
             {
                 return NotFound();
             }
 
-            var funcionarios =  await _context.funcionarios.FirstOrDefaultAsync(m => m.id == id);
-            if (funcionarios == null)
+            var funcionario = await this.context.Funcionarios.FirstOrDefaultAsync(m => m.Id == id);
+            if (funcionario is null)
             {
                 return NotFound();
             }
-            this.funcionarios = funcionarios;
+            this.Funcionario = funcionario;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Mensagem"] = "Erro ao editar Funcionário, entre em contato com o suporte.";
-                return Page();
-            }
             try
             {
-            _context.funcionarios.Update(this.funcionarios);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                if (!funcionariosExists(funcionarios.id))
+                if (!ModelState.IsValid)
                 {
-                    return Page();
+                    throw new Exception("Erro ao editar Funcionário, entre em contato com o suporte.");
+                }
 
-                }
-                else
-                {
-                    throw;
-                }
+                await context.Funcionarios.ExecuteUpdateAsync(funcionario => funcionario.SetProperty(p => p.Nome, this.Funcionario.Nome)
+                                                                     .SetProperty(p => p.Cargo, this.Funcionario.Cargo)
+                                                                     .SetProperty(p => p.DataAdmissao, this.Funcionario.DataAdmissao)
+                                                                     .SetProperty(p => p.CodPix, this.Funcionario.CodPix));
+                await context.SaveChangesAsync();
             }
-            TempData["Mensagem"] = "Funcionário salvo com sucesso!";
+            catch (Exception e)
+            {
+                this.Erro = true;
+                this.Message = e.Message;
+                return Page();
+            }
+
+            this.Message = "Funcionário salvo com sucesso!";
 
             return RedirectToPage("./Index");
-        }
-
-        private bool funcionariosExists(int id)
-        {
-            return _context.funcionarios.Any(e => e.id == id);
         }
     }
 }

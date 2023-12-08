@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using controleJornadas.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using controleJornadas.Models;
 
 namespace controleJornadas.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<Usuario>(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
-        public DbSet<Bases> Bases { get; set; } = default!;
-        public DbSet<controleJornadas.Models.Funcionarios> funcionarios { get; set; } = default!;
-        public DbSet<controleJornadas.Models.Jornadas> Jornadas { get; set; } = default!;
+        public DbSet<Usuario> Usuarios { get; set; }
+
+        public DbSet<Base> Bases { get; set; }
+
+        public DbSet<Funcionario> Funcionarios { get; set; }
+
+        public DbSet<Jornada> Jornadas { get; set; }
     }
 }

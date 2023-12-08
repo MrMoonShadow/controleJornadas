@@ -21,7 +21,7 @@ namespace controleJornadas.Pages.JornadasCRUD
         }
 
         [BindProperty]
-        public Jornadas Jornadas { get; set; } = default!;
+        public Jornada Jornadas { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,7 +30,7 @@ namespace controleJornadas.Pages.JornadasCRUD
                 return NotFound();
             }
 
-            var jornadas =  await _context.Jornadas.FirstOrDefaultAsync(m => m.id == id);
+            var jornadas =  await _context.Jornadas.FirstOrDefaultAsync(m => m.Id == id);
             if (jornadas == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace controleJornadas.Pages.JornadasCRUD
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!JornadasExists(Jornadas.id))
+                if (!JornadasExists(Jornadas.Id))
                 {
                     return NotFound();
                 }
@@ -71,7 +71,7 @@ namespace controleJornadas.Pages.JornadasCRUD
 
         private bool JornadasExists(int id)
         {
-            return _context.Jornadas.Any(e => e.id == id);
+            return _context.Jornadas.Any(e => e.Id == id);
         }
     }
 }

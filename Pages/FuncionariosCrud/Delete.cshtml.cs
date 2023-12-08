@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.FuncionariosCrud
 {
@@ -20,7 +15,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
         }
 
         [BindProperty]
-        public Funcionarios funcionarios { get; set; } = default!;
+        public Funcionario funcionarios { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +24,7 @@ namespace controleJornadas.Pages.FuncionariosCrud
                 return NotFound();
             }
 
-            var funcionarios = await _context.funcionarios.FirstOrDefaultAsync(m => m.id == id);
+            var funcionarios = await _context.Funcionarios.FirstOrDefaultAsync(m => m.Id == id);
 
             if (funcionarios == null)
             {
@@ -49,11 +44,11 @@ namespace controleJornadas.Pages.FuncionariosCrud
                 return NotFound();
             }
 
-            var funcionarios = await _context.funcionarios.FindAsync(id);
+            var funcionarios = await _context.Funcionarios.FindAsync(id);
             if (funcionarios != null)
             {
-                funcionarios = funcionarios;
-                _context.funcionarios.Remove(funcionarios);
+                this.funcionarios = funcionarios;
+                _context.Funcionarios.Remove(funcionarios);
                 await _context.SaveChangesAsync();
             }
 

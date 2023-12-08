@@ -3,16 +3,17 @@
 
 @{
     ViewData["Title"] = "Alterar jornada";
+    Layout = "_Layout";
 }
 
 
-<h4>Alterarando a Jornada: @Model.Jornadas.id ?</h4>
+<h4>Alterarando a Jornada: @Model.Jornadas.Id ?</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Jornadas.id" />
+            <input type="hidden" asp-for="Jornadas.Id" />
             <div class="form-group">
                 <label asp-for="Jornadas.HrInicio" class="control-label"></label>
                 <input asp-for="Jornadas.HrInicio" class="form-control" />

@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Alterar Filial";
+    Layout = "_Layout";
 }
 
 
@@ -15,7 +16,7 @@
         @TempData["Mensagem"]
     </div>
 }
-<div class="row">
+<div class="row" style="justify-content: center;">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -36,8 +37,9 @@
                 <span asp-validation-for="Bases.Sigla" class="text-danger"></span>
             </div>
             <br>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" /> <a asp-page="./Index">Voltar</a>
+            <div class="form-group" style="display: flex;justify-content: space-between;">
+                <input type="submit" value="Salvar alterações" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="Index">Voltar</a>
             </div>
         </form>
     </div>

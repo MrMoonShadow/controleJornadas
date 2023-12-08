@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Funcionários";
+    Layout = "_Layout";
 }
 
 <p>
@@ -12,20 +13,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.funcionarios[0].nome)
+                @Html.DisplayNameFor(model => model.funcionarios[0].Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.funcionarios[0].cargo)
+                @Html.DisplayNameFor(model => model.funcionarios[0].Cargo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.funcionarios[0].dataAdmissao)
+                @Html.DisplayNameFor(model => model.funcionarios[0].DataAdmissao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.funcionarios[0].codPix)
+                @Html.DisplayNameFor(model => model.funcionarios[0].CodPix)
             </th>
             
             <th>
-                @Html.DisplayNameFor(model => model.funcionarios[0].Bases.Sigla)
+                @Html.DisplayNameFor(model => model.funcionarios[0].Base.Sigla)
             </th>
             <th></th>
         </tr>
@@ -34,25 +35,25 @@
 @foreach (var item in Model.funcionarios) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.nome)
+                @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cargo)
+                @Html.DisplayFor(modelItem => item.Cargo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dataAdmissao)
+                @Html.DisplayFor(modelItem => item.DataAdmissao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.codPix)
+                @Html.DisplayFor(modelItem => item.CodPix)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Bases.Sigla)
+                @Html.DisplayFor(modelItem => item.Base.Sigla)
              </td>
 
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Alterar</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Detalhes</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Excluir</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Alterar</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Excluir</a>
             </td>
         </tr>
 }

@@ -20,7 +20,7 @@ namespace controleJornadas.Pages.JornadasCRUD
         }
 
         [BindProperty]
-        public Jornadas Jornadas { get; set; } = default!;
+        public Jornada Jornadas { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,7 +29,7 @@ namespace controleJornadas.Pages.JornadasCRUD
                 return NotFound();
             }
 
-            var jornadas = await _context.Jornadas.FirstOrDefaultAsync(m => m.id == id);
+            var jornadas = await _context.Jornadas.FirstOrDefaultAsync(m => m.Id == id);
 
             if (jornadas == null)
             {

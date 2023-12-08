@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Detalhes do Funcionário";
+    Layout = "_Layout";
 }
 
 
@@ -11,32 +12,32 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.nome)
+            @Html.DisplayNameFor(model => model.funcionarios.Nome)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.nome)
+            @Html.DisplayFor(model => model.funcionarios.Nome)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.cargo)
+            @Html.DisplayNameFor(model => model.funcionarios.Cargo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.cargo)
+            @Html.DisplayFor(model => model.funcionarios.Cargo)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.dataAdmissao)
+            @Html.DisplayNameFor(model => model.funcionarios.DataAdmissao)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.dataAdmissao)
+            @Html.DisplayFor(model => model.funcionarios.DataAdmissao)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.funcionarios.codPix)
+            @Html.DisplayNameFor(model => model.funcionarios.CodPix)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.funcionarios.codPix)
+            @Html.DisplayFor(model => model.funcionarios.CodPix)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.funcionarios.id">Alterar</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.funcionarios.Id">Alterar</a> |
     <a asp-page="./Index">Voltar</a>
 </div>

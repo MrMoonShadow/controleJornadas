@@ -3,34 +3,30 @@
 
 @{
     ViewData["Title"] = "Detalhes da  Filial";
+    Layout = "_Layout";
 }
 
 
-<div>
+<div class="row" style="justify-content: center;">
     <h4>Detalhes Filial @Model.Bases.Sigla</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bases.Nome)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bases.Nome)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bases.Cidade)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bases.Cidade)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Bases.Sigla)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Bases.Sigla)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Bases.Id">Edit</a> | <a asp-page="./Index">Voltar</a>
-
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Bases.Nome" class="control-label"></label>
+            <input asp-for="Bases.Nome" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Bases.Cidade" class="control-label"></label>
+            <input asp-for="Bases.Cidade" class="form-control" readonly />
+        </div>
+        <div class="form-group">
+            <label asp-for="Bases.Sigla" class="control-label"></label>
+            <input asp-for="Bases.Sigla" class="form-control" readonly />
+        </div>
+        <br>
+        <div class="form-group" style="display: flex;justify-content: space-between;">
+            <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Bases.Id">Editar</a>
+            <a class="btn btn-secondary" asp-page="./Index">Voltar</a>
+        </div>
+    </div>
 </div>

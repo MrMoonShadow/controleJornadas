@@ -19,7 +19,7 @@ namespace controleJornadas.Pages.BasesCrud
             _context = context;
         }
 
-        public Bases Bases { get; set; } = default!;
+        public Base Bases { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

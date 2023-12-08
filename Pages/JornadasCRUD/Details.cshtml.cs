@@ -10,16 +10,11 @@ using controleJornadas.Models;
 
 namespace controleJornadas.Pages.JornadasCRUD
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel(ApplicationDbContext context) : PageModel
     {
-        private readonly controleJornadas.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = context;
 
-        public DetailsModel(controleJornadas.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public Jornadas Jornadas { get; set; } = default!;
+        public Jornada Jornadas { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,7 +23,7 @@ namespace controleJornadas.Pages.JornadasCRUD
                 return NotFound();
             }
 
-            var jornadas = await _context.Jornadas.FirstOrDefaultAsync(m => m.id == id);
+            var jornadas = await _context.Jornadas.Include(x => x.Funcionario).FirstOrDefaultAsync(m => m.Id == id);
             if (jornadas == null)
             {
                 return NotFound();

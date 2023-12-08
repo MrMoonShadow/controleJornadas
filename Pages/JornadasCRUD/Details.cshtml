@@ -3,11 +3,12 @@
 
 @{
     ViewData["Title"] = "Detahes da jornada";
+    Layout = "_Layout";
 }
 
 
 <div>
-    <h4>Detalhes da Jornada: @Model.Jornadas.id</h4>
+    <h4>Detalhes da Jornada: @Model.Jornadas.Id</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -34,9 +35,15 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Jornadas.Valor)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Jornadas.Funcionario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Jornadas.Funcionario.Nome)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Jornadas.id">Alterar</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Jornadas.Id">Alterar</a> |
     <a asp-page="./Index">Voltar</a>
 </div>

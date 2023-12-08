@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Jornadas";
+    Layout = "_Layout";
 }
 
 <p>
@@ -42,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Valor)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.id">Alterar</a> |
-                <a asp-page="./Details" asp-route-id="@item.id">Detalhes</a> |
-                <a asp-page="./Delete" asp-route-id="@item.id">Alterar</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Alterar</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Alterar</a>
             </td>
         </tr>
 }

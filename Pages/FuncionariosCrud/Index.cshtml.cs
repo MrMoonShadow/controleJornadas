@@ -4,20 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace controleJornadas.Pages.FuncionariosCrud
 {
-    public class IndexModel : PageModel
+    public class IndexModel(Data.ApplicationDbContext context) : PageModel
     {
-        private readonly controleJornadas.Data.ApplicationDbContext _context;
+        private readonly Data.ApplicationDbContext context = context;
 
-        public IndexModel(controleJornadas.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public IList<Funcionarios> funcionarios { get;set; } = default!;
+        public IList<Funcionario> funcionarios { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            this.funcionarios = await _context.funcionarios.Include(a =>a.Bases).ToListAsync();
+            this.funcionarios = await this.context.Funcionarios.Include(a =>a.Base).ToListAsync();
         }
     }
 }

@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Jornadas";
+    Layout = "_Layout";
 }
 
 <h4>Jornadas</h4>
@@ -13,24 +14,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Jornadas.HrInicio" class="control-label"></label>
-                <input asp-for="Jornadas.HrInicio" class="form-control" />
-                <span asp-validation-for="Jornadas.HrInicio" class="text-danger"></span>
+                <label asp-for="Jornada.HrInicio" class="control-label"></label>
+                <input asp-for="Jornada.HrInicio" class="form-control" />
+                <span asp-validation-for="Jornada.HrInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Jornadas.HrFim" class="control-label"></label>
-                <input asp-for="Jornadas.HrFim" class="form-control" />
-                <span asp-validation-for="Jornadas.HrFim" class="text-danger"></span>
+                <label asp-for="Jornada.HrFim" class="control-label"></label>
+                <input asp-for="Jornada.HrFim" class="form-control" />
+                <span asp-validation-for="Jornada.HrFim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Jornadas.Turno" class="control-label"></label>
-                <input asp-for="Jornadas.Turno" class="form-control" />
-                <span asp-validation-for="Jornadas.Turno" class="text-danger"></span>
+                <label asp-for="Jornada.Turno" class="control-label"></label>
+                <input asp-for="Jornada.Turno" class="form-control" />
+                <span asp-validation-for="Jornada.Turno" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Jornadas.Valor" class="control-label"></label>
-                <input asp-for="Jornadas.Valor" class="form-control" />
-                <span asp-validation-for="Jornadas.Valor" class="text-danger"></span>
+                <label asp-for="Jornada.Valor" class="control-label"></label>
+                <input asp-for="Jornada.Valor" class="form-control" />
+                <span asp-validation-for="Jornada.Valor" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="Jornada.FuncionarioId" class="control-label"></label>
+                <select asp-for="Jornada.FuncionarioId" class="form-control" asp-items="ViewBag.Funcionarios"></select>
             </div>
             <br>
             <div class="form-group">

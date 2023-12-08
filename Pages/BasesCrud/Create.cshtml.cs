@@ -1,60 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using controleJornadas.Data;
+using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.BasesCrud
 {
-    public class CreateModel : PageModel
+    public class CreateModel(ApplicationDbContext context) : PageModel
     {
-        private readonly controleJornadas.Data.ApplicationDbContext _context;
-
-        public CreateModel(controleJornadas.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext context = context;
 
         public IActionResult OnGet()
         {
-
+            this.Erro = false;
+            this.Message = null;
             return Page();
         }
 
         [BindProperty]
-        public Bases Bases { get; set; } = default!;
+        public Base Base { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        [BindProperty]
+        public bool Erro { get; set; } = false;
+
+        [BindProperty]
+        public string? Message { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                TempData["Mensagem"] = "Linha 36Registro salvo com sucesso!";
-
-                return Page();
-            }
-
             try
             {
-                _context.Bases.Add(Bases);
+                ModelState.ClearValidationState(nameof(Base));
+                if (!TryValidateModel(Base, nameof(Base)))
+                {
+                    throw new Exception("Base inválida");
+                }
+                else
+                {
+                    await this.context.Bases.AddAsync(Base);
+                    await this.context.SaveChangesAsync();
 
+                    return RedirectToPage("./Index");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                TempData["Mensagem"] = "Linha 47Erro ao salvar no banco de dados!";
+                this.Erro = true;
+                this.Message = ex.Message;
+                return Page();
             }
-            
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-
-
         }
-
     }
 }

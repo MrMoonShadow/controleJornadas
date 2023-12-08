@@ -1,42 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using controleJornadas.Data;
+using controleJornadas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using controleJornadas.Data;
-using controleJornadas.Models;
 
 namespace controleJornadas.Pages.FuncionariosCrud
 {
-    public class CreateModel : PageModel
+    public class CreateModel(ApplicationDbContext context) : PageModel
     {
-        private readonly controleJornadas.Data.ApplicationDbContext _context;
-
-        public CreateModel(controleJornadas.Data.ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext context = context;
 
         public IActionResult OnGet()
         {
-            ViewData["fodase"] = new SelectList(_context.Bases, "Id", "Sigla");
+            this.Erro = false;
+            this.Message = null;
+            ViewData["Bases"] = new SelectList(this.context.Bases, "Id", "Sigla");
             return Page();
         }
 
         [BindProperty]
-        public Funcionarios funcionarios { get; set; } = default!;
+        public Funcionario Funcionario { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+        [BindProperty]
+        public bool Erro { get; set; } = false;
+
+        [BindProperty]
+        public string? Message { get; set; }
+
         public async Task<IActionResult> OnPostAsync()
         {
-        
+            try
+            {
+                ModelState.ClearValidationState(nameof(Funcionario));
+                if (!TryValidateModel(Funcionario, nameof(Funcionario)))
+                {
+                    throw new Exception("Funcionário inválido");
+                }
+                else
+                {
+                    this.context.Funcionarios.Add(Funcionario);
+                    await this.context.SaveChangesAsync();
 
-            _context.funcionarios.Add(funcionarios);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+                    return RedirectToPage("./Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Erro = true;
+                this.Message = ex.Message;
+                return Page();
+            }
         }
     }
 }

@@ -3,13 +3,14 @@
 
 @{
     ViewData["Title"] = "Excluir Jornada";
+    Layout = "_Layout";
 }
 
 
-<h3>Tem certeza que deseja alterar a Jornada: @Model.Jornadas.id? </h3>
+<h3>Tem certeza que deseja alterar a Jornada: @Model.Jornadas.Id? </h3>
 <div>
-   
-    <hr/>
+
+    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Jornadas.HrInicio)
@@ -36,9 +37,9 @@
             @Html.DisplayFor(model => model.Jornadas.Valor)
         </dd>
     </dl>
-    
+
     <form method="post">
-        <input type="hidden" asp-for="Jornadas.id" />
+        <input type="hidden" asp-for="Jornadas.Id" />
         <input type="submit" value="Excluir" class="btn btn-danger" /> |
         <a asp-page="./Index">Voltar</a>
     </form>

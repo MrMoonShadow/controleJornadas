@@ -19,7 +19,7 @@ namespace controleJornadas.Pages.JornadasCRUD
             _context = context;
         }
 
-        public IList<Jornadas> Jornadas { get;set; } = default!;
+        public IList<Jornada> Jornadas { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

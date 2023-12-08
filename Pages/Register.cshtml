@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model RegisterModel
 @{
     ViewData["Title"] = "Controle de Jornadas - Home";
 }
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="w3l-form-info">
             <div class="w3_info">
-                <h2>Login</h2>
+                <h2>Cadastro</h2>
                 <form method="post">
                     <div class="input-group">
                         <span><i class="fas fa-user" aria-hidden="true"></i></span>
@@ -17,14 +17,14 @@
                     </div>
                     <div class="input-group">
                         <span><i class="fas fa-key" aria-hidden="true"></i></span>
-                        <input asp-for="Senha" type="password" placeholder="Senha" required class="form-control" />
+                        <input asp-for="Senha" type="password" placeholder="digite sua senha" required class="form-control" />
                     </div>
-                    <div class="form-row bottom">
-                        <a href="#url" class="forgot">Esqueceu a senha?</a>
+                    <div class="input-group">
+                        <span><i class="fas fa-key" aria-hidden="true"></i></span>
+                        <input asp-for="ConfirmarSenha" type="password" placeholder="Confirme sua senha" required class="form-control" />
                     </div>
-                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+                    <button class="btn btn-primary btn-block" type="submit">Cadastrar</button>
                 </form>
-                <a class="account" asp-page="Register">Cadastrar</a>
             </div>
         </div>
     </div>

@@ -3,39 +3,46 @@
 
 @{
     ViewData["Title"] = "Criar Filial";
+    Layout = "_Layout";
 }
 
 
-<h4>Nova Filial</h4>
+<h3>Nova Filial</h3>
 <hr />
-@if (TempData["Mensagem"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Mensagem"]
-    </div>
-}
-<div class="row">
+<div class="row" style="justify-content: center;">
     <div class="col-md-4">
+        <div>
+            @if (this.Model.Erro)
+            {
+                <div class="alert alert-danger">@this.Model.Message</div>
+            }
+
+            @if (!this.Model.Erro && this.Model.Message is not null)
+            {
+                <div class="alert alert-success">@this.Model.Message</div>
+            }
+        </div>
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Bases.Nome" class="control-label"></label>
-                <input asp-for="Bases.Nome" class="form-control" />
-                <span asp-validation-for="Bases.Nome" class="text-danger"></span>
+                <label asp-for="Base.Nome" class="control-label"></label>
+                <input asp-for="Base.Nome" class="form-control" />
+                <span asp-validation-for="Base.Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Bases.Cidade" class="control-label"></label>
-                <input asp-for="Bases.Cidade" class="form-control" />
-                <span asp-validation-for="Bases.Cidade" class="text-danger"></span>
+                <label asp-for="Base.Cidade" class="control-label"></label>
+                <input asp-for="Base.Cidade" class="form-control" />
+                <span asp-validation-for="Base.Cidade" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Bases.Sigla" class="control-label"></label>
-                <input asp-for="Bases.Sigla" class="form-control" />
-                <span asp-validation-for="Bases.Sigla" class="text-danger"></span>
+                <label asp-for="Base.Sigla" class="control-label"></label>
+                <input asp-for="Base.Sigla" class="form-control" />
+                <span asp-validation-for="Base.Sigla" class="text-danger"></span>
             </div>
             <br>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />  <a asp-page="Index">Voltar</a>
+            <div class="form-group" style="display: flex;justify-content: space-between;">
+                <input type="submit" value="Criar Base" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="Index">Voltar</a>
             </div>
         </form>
     </div>
